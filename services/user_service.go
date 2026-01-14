@@ -10,9 +10,9 @@ import (
 )
 
 type InterfaceUserService interface {
-	GetAll() ([]models.User, error) // บอกว่าต้องมีฟังก์ชัน GetAll()
-	GetByID(ID int) ([]models.User, error)
-	UpdateUsers(ID int, DataUpdate models.User) (models.User, error)
+	GetAll() ([]models.UserCals, error) // บอกว่าต้องมีฟังก์ชัน GetAll()
+	GetByID(ID int) ([]models.UserCals, error)
+	UpdateUsers(ID int, DataUpdate models.UserCals) (models.UserCals, error)
 	Delete(ID int) error
 	Create(DataCreate []models.User) ([]models.User, error)
 }
@@ -23,36 +23,36 @@ func NewUserService() InterfaceUserService { //จะ return interface ได้
 
 type structuserService struct{} //ประกาศไว้ให้สืบทอดเพื่อใช้ functon ที่ interface ต้องการ
 
-func (s *structuserService) GetAll() ([]models.User, error) { //สืบทอด structuserService มาแล้ว
-	var users []models.User
+func (s *structuserService) GetAll() ([]models.UserCals, error) { //สืบทอด structuserService มาแล้ว
+	var user_cals []models.UserCals
 
 	// ใช้ database.GetDB() เพื่อดึง instance ของ GORM DB
-	db := database.GetDB()
+	db := database.GetDBCals()
 
 	// ดึงข้อมูลทั้งหมดจากตาราง users
-	if err := db.Find(&users).Error; err != nil {
+	if err := db.Find(&user_cals).Error; err != nil {
 		return nil, err
 	}
 
-	return users, nil
+	return user_cals, nil
 }
-func (s *structuserService) GetByID(ID int) ([]models.User, error) {
-	var users []models.User
+func (s *structuserService) GetByID(ID int) ([]models.UserCals, error) {
+	var user_cals []models.UserCals
 	// ใช้ database.GetDB() เพื่อดึง instance ของ GORM DB
-	db := database.GetDB()
-	if err := db.Find(&users, ID).Error; err != nil {
+	db := database.GetDBCals()
+	if err := db.Find(&user_cals, ID).Error; err != nil {
 		return nil, err
 	}
-	return users, nil
+	return user_cals, nil
 
 }
 
-func (s *structuserService) UpdateUsers(ID int, DataUpdate models.User) (models.User, error) {
+func (s *structuserService) UpdateUsers(ID int, DataUpdate models.UserCals) (models.UserCals, error) {
 	db := database.GetDB()
 
 	DataUpdate.ID = ID
 	if err := db.Save(DataUpdate).Error; err != nil {
-		return models.User{}, err
+		return models.UserCals{}, err
 	}
 	// var users []models.User
 	return DataUpdate, nil

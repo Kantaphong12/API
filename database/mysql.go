@@ -15,6 +15,8 @@ import (
 
 var db *gorm.DB
 
+var dbCals *gorm.DB
+
 func Connect() {
 	var err error
 	db, err = gorm.Open(mysql.New(mysql.Config{
@@ -37,7 +39,41 @@ func Connect() {
 		fmt.Println("AutoMigrate Error:", err)
 	}
 
+	ConnectCals()
+
 }
 func GetDB() *gorm.DB { //ใครเรียกใช้ return db type *gorm.DB ให้
 	return db
+}
+
+func ConnectCals() {
+	var err error
+	dbCals, err = gorm.Open(mysql.New(mysql.Config{
+		DSN:                       "surindev_healthy:@admin12345@tcp(127.0.0.1:3306)/surindev_healthy?charset=utf8&parseTime=True&loc=Local",
+		DefaultStringSize:         256,
+		DisableDatetimePrecision:  true,
+		DontSupportRenameIndex:    true,
+		DontSupportRenameColumn:   true,
+		SkipInitializeWithVersion: false,
+	}), &gorm.Config{})
+
+	if err != nil {
+		fmt.Println("DB (Calories) Connect Error:", err)
+		panic("failed to connect database: caloriesdb")
+	} else {
+		fmt.Println("DB (Calories) Connect successfuly")
+	}
+
+	// ✅ สร้างตาราง Cals
+	if err := dbCals.AutoMigrate(&models.Cals{}); err != nil {
+		fmt.Println("AutoMigrate Cals Error:", err)
+	}
+	if err := dbCals.AutoMigrate(&models.UserCals{}); err != nil {
+		fmt.Println("AutoMigrate UserCals Error:", err)
+	}
+
+}
+
+func GetDBCals() *gorm.DB { //ใครเรียกใช้ return db type *gorm.DB ให้
+	return dbCals
 }

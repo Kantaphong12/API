@@ -51,11 +51,11 @@ func (uc *UserController) UpdateUsers(c *fiber.Ctx) error {
 	if err != nil {
 		return c.Status(fiber.StatusBadRequest).SendString(err.Error())
 	}
-	var User models.User
-	if err := c.BodyParser(&User); err != nil {
+	var UserCals models.UserCals
+	if err := c.BodyParser(&UserCals); err != nil {
 		return c.Status(fiber.StatusBadRequest).SendString(err.Error())
 	}
-	user, _ := uc.serviceCurrent.UpdateUsers(UserID, User)
+	user, _ := uc.serviceCurrent.UpdateUsers(UserID, UserCals)
 	fmt.Println("UserID", UserID)
 
 	return c.JSON(user)
