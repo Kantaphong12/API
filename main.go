@@ -19,7 +19,7 @@ import (
 func main() {
 	app := fiber.New()
 	app.Use(cors.New(cors.Config{
-		AllowOrigins:     "*",
+		AllowOrigins:     "wildcard",
 		AllowMethods:     "GET,POST,PUT,DELETE,OPTIONS",
 		AllowHeaders:     "*",
 		AllowCredentials: true,
