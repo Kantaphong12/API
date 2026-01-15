@@ -1,0 +1,9 @@
+DirectoryIndex disabled
+RewriteEngine On
+
+# 1. ถ้าเจอไฟล์ที่มีอยู่จริง (เช่น deploy.php, app.txt) ให้เปิดปกติ (ไม่ต้องส่งไป Port 5000)
+RewriteCond %{REQUEST_FILENAME} -f
+RewriteRule ^ - [L]
+
+# 2. ถ้าไม่เจอไฟล์ (พวก API ทั้งหลาย) ให้ส่งไปหา Go ที่ Port 5000
+RewriteRule ^(.*)$ http://127.0.0.1:5000/$1 [P,L]
