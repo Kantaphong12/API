@@ -20,7 +20,7 @@ var dbCals *gorm.DB
 func Connect() {
 	var err error
 	db, err = gorm.Open(mysql.New(mysql.Config{
-		DSN: "surindev_healthy:kantaphong@tcp(127.0.0.1:3306)/surindev_healthy?charset=utf8&parseTime=True&loc=Local", // data source name
+		DSN: "surindev_healthy:kantaphong@tcp(surindev.com)/surindev_healthy?charset=utf8&parseTime=True&loc=Local", // data source name
 		// DSN:                       "root:@tcp(127.0.0.1:3306)/surindev_healthy?charset=utf8&parseTime=True&loc=Local",
 		DefaultStringSize:         256,   // default size for string fields
 		DisableDatetimePrecision:  true,  // disable datetime precision, which not supported before MySQL 5.6
@@ -50,7 +50,7 @@ func GetDB() *gorm.DB { //ใครเรียกใช้ return db type *gorm
 func ConnectCals() {
 	var err error
 	dbCals, err = gorm.Open(mysql.New(mysql.Config{
-		DSN: "surindev_healthy:kantaphong@tcp(127.0.0.1:3306)/surindev_healthy?charset=utf8&parseTime=True&loc=Local",
+		DSN: "surindev_healthy:kantaphong@tcp(surindev.com)/surindev_healthy?charset=utf8&parseTime=True&loc=Local",
 		// DSN:                       "root:@tcp(127.0.0.1:3306)/surindev_healthy?charset=utf8&parseTime=True&loc=Local",
 		DefaultStringSize:         256,
 		DisableDatetimePrecision:  true,
