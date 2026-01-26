@@ -81,7 +81,7 @@ func ConnectCals() {
 func ConnectTask() {
 	var err error
 	dbTask, err = gorm.Open(mysql.New(mysql.Config{
-		DSN: "surindev_healthy:kantaphong@tcp(surindev.com)/surindev_workManagement?charset=utf8&parseTime=True&loc=Local",
+		DSN: "surindev_healthy:kantaphong@tcp(surindev.com)/surindev_workmanagement?charset=utf8&parseTime=True&loc=Local",
 		// DSN:                       "root:@tcp(127.0.0.1:3306)/surindev_workManagement?charset=utf8&parseTime=True&loc=Local",
 		DefaultStringSize:         256,
 		DisableDatetimePrecision:  true,
