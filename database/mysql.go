@@ -17,6 +17,8 @@ var db *gorm.DB
 
 var dbCals *gorm.DB
 
+var dbTask *gorm.DB
+
 func Connect() {
 	var err error
 	db, err = gorm.Open(mysql.New(mysql.Config{
@@ -41,7 +43,7 @@ func Connect() {
 	}
 
 	ConnectCals()
-
+	ConnectTask()
 }
 func GetDB() *gorm.DB { //ใครเรียกใช้ return db type *gorm.DB ให้
 	return db
@@ -74,6 +76,36 @@ func ConnectCals() {
 		fmt.Println("AutoMigrate UserCals Error:", err)
 	}
 
+}
+
+func ConnectTask() {
+	var err error
+	dbTask, err = gorm.Open(mysql.New(mysql.Config{
+		DSN: "surindev_healthy:kantaphong@tcp(surindev.com)/surindev_workManagement?charset=utf8&parseTime=True&loc=Local",
+		// DSN:                       "root:@tcp(127.0.0.1:3306)/surindev_workManagement?charset=utf8&parseTime=True&loc=Local",
+		DefaultStringSize:         256,
+		DisableDatetimePrecision:  true,
+		DontSupportRenameIndex:    true,
+		DontSupportRenameColumn:   true,
+		SkipInitializeWithVersion: false,
+	}), &gorm.Config{})
+
+	if err != nil {
+		fmt.Println("DB (Calories) Connect Error:", err)
+		panic("failed to connect database: caloriesdb")
+	} else {
+		fmt.Println("DB (Calories) Connect successfuly")
+	}
+
+	// ✅ สร้างตาราง Cals
+	if err := dbTask.AutoMigrate(&models.Task{}); err != nil {
+		fmt.Println("AutoMigrate Cals Error:", err)
+	}
+
+}
+
+func GetDBTask() *gorm.DB {
+	return dbTask
 }
 
 func GetDBCals() *gorm.DB { //ใครเรียกใช้ return db type *gorm.DB ให้

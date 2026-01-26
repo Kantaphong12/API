@@ -10,7 +10,7 @@ import (
 )
 
 type CalorieController struct { // สร้าง struct ของ controller
-	serviceCurrent services.InterfaceCalsService
+	serviceCurrent services.InterfaceCalsService // ประกาศ service ที่จะใช้ใน controller
 	Cals           []models.Cals
 }
 
@@ -82,9 +82,11 @@ func (uc *CalorieController) Register(c *fiber.Ctx) error {
 }
 
 func (uc *CalorieController) Login(c *fiber.Ctx) error {
+
 	var userCals models.UserCals
 	if err := c.BodyParser(&userCals); err != nil {
 		return c.Status(fiber.StatusBadRequest).SendString(err.Error())
+
 	}
 	getUser, err := uc.serviceCurrent.Login(userCals.Email, userCals.Password)
 	if err != nil {

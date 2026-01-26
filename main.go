@@ -31,7 +31,12 @@ func main() {
 
 	calsService := services.NewCalsService()                        //ได้ struct ที่มี function ที่สืบทอดตาม interface ต้องการ
 	calsController := controllers.NewCalorieController(calsService) //// {} คือสร้าง instance go ไม่อนุญาติให้ใช้ตรงๆ
-	routes.CalsRoutes(app, calsController)                          //ส่ง app กับ userController ที่รวมทุกอย่างแล้วเข้าไปจัดการ route ที่ UserRoutes
+
+	services := services.NewTaskService()
+	taskController := controllers.NewTaskController(services)
+	routes.TaskRoutes(app, taskController)
+
+	routes.CalsRoutes(app, calsController) //ส่ง app กับ userController ที่รวมทุกอย่างแล้วเข้าไปจัดการ route ที่ UserRoutes
 	fmt.Println("Server running at http://localhost:5000")
 	app.Listen(":5000")
 
