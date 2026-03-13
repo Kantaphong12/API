@@ -18,6 +18,7 @@ import (
 )
 
 func main() {
+	fmt.Println("connecting to server...")
 	app := fiber.New()
 	app.Use(cors.New(cors.Config{
 		AllowOrigins:     "http://localhost:9000,https://calorie.surindev.com",
@@ -28,6 +29,7 @@ func main() {
 	app.Get("/", func(c *fiber.Ctx) error {
 		return c.Status(200).SendString("Server is running!")
 	})
+
 	database.Connect()
 	userService := services.NewUserService()                     //ได้ struct ที่มี function ที่สืบทอดตาม interface ต้องการ
 	userController := controllers.NewUserController(userService) //// {} คือสร้าง instance go ไม่อนุญาติให้ใช้ตรงๆ
@@ -41,11 +43,12 @@ func main() {
 	routes.TaskRoutes(app, taskController)
 
 	routes.CalsRoutes(app, calsController) //ส่ง app กับ userController ที่รวมทุกอย่างแล้วเข้าไปจัดการ route ที่ UserRoutes
-	fmt.Println("Server running at http://localhost:5000")
+
 	port := os.Getenv("PORT")
 	if port == "" {
 		port = "5000" // ถ้าไม่มีค่า PORT (เช่นรันในเครื่องเราเอง) ให้ใช้ 5000
 	}
 	app.Listen(":" + port)
+	fmt.Println("Server running at http://localhost:5000")
 
 }
