@@ -22,8 +22,8 @@ var dbTask *gorm.DB
 func Connect() {
 	var err error
 	db, err = gorm.Open(mysql.New(mysql.Config{
-		// DSN: "surindev_healthy:kantaphong@tcp(surindev.com)/surindev_healthy?charset=utf8&parseTime=True&loc=Local", // data source name
-		DSN:                       "root:@tcp(127.0.0.1:3306)/surindev_healthy?charset=utf8&parseTime=True&loc=Local",
+		DSN: "surindev_healthy:kantaphong@tcp(surindev.com)/surindev_healthy?charset=utf8&parseTime=True&loc=Local", // data source name
+		// DSN:                       "root:@tcp(127.0.0.1:3306)/surindev_healthy?charset=utf8&parseTime=True&loc=Local",
 		DefaultStringSize:         256,   // default size for string fields
 		DisableDatetimePrecision:  true,  // disable datetime precision, which not supported before MySQL 5.6
 		DontSupportRenameIndex:    true,  // drop & create when rename index, rename index not supported before MySQL 5.7, MariaDB
@@ -52,8 +52,8 @@ func GetDB() *gorm.DB { //ใครเรียกใช้ return db type *gorm
 func ConnectCals() {
 	var err error
 	dbCals, err = gorm.Open(mysql.New(mysql.Config{
-		// DSN: "surindev_healthy:kantaphong@tcp(surindev.com)/surindev_healthy?charset=utf8&parseTime=True&loc=Local",
-		DSN:                       "root:@tcp(127.0.0.1:3306)/surindev_healthy?charset=utf8&parseTime=True&loc=Local",
+		DSN: "surindev_healthy:kantaphong@tcp(surindev.com)/surindev_healthy?charset=utf8&parseTime=True&loc=Local",
+		// DSN:                       "root:@tcp(127.0.0.1:3306)/surindev_healthy?charset=utf8&parseTime=True&loc=Local",
 		DefaultStringSize:         256,
 		DisableDatetimePrecision:  true,
 		DontSupportRenameIndex:    true,
@@ -81,8 +81,8 @@ func ConnectCals() {
 func ConnectTask() {
 	var err error
 	dbTask, err = gorm.Open(mysql.New(mysql.Config{
-		// DSN: "surindev_healthy:kantaphong@tcp(surindev.com)/surindev_workmanagement?charset=utf8&parseTime=True&loc=Local",
-		DSN:                       "root:@tcp(127.0.0.1:3306)/surindev_workManagement?charset=utf8&parseTime=True&loc=Local",
+		DSN: "surindev_healthy:kantaphong@tcp(surindev.com)/surindev_workmanagement?charset=utf8&parseTime=True&loc=Local",
+		// DSN:                       "root:@tcp(127.0.0.1:3306)/surindev_workManagement?charset=utf8&parseTime=True&loc=Local",
 		DefaultStringSize:         256,
 		DisableDatetimePrecision:  true,
 		DontSupportRenameIndex:    true,
