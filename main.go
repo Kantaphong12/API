@@ -7,6 +7,7 @@ package main
 
 import (
 	"fmt"
+	"os"
 
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/cors"
@@ -41,6 +42,10 @@ func main() {
 
 	routes.CalsRoutes(app, calsController) //ส่ง app กับ userController ที่รวมทุกอย่างแล้วเข้าไปจัดการ route ที่ UserRoutes
 	fmt.Println("Server running at http://localhost:5000")
-	app.Listen(":5000")
+	port := os.Getenv("PORT")
+	if port == "" {
+		port = "5000" // ถ้าไม่มีค่า PORT (เช่นรันในเครื่องเราเอง) ให้ใช้ 5000
+	}
+	app.Listen(":" + port)
 
 }
