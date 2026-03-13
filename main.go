@@ -24,6 +24,9 @@ func main() {
 		AllowHeaders:     "*",
 		AllowCredentials: true,
 	}))
+	app.Get("/", func(c *fiber.Ctx) error {
+		return c.Status(200).SendString("Server is running!")
+	})
 	database.Connect()
 	userService := services.NewUserService()                     //ได้ struct ที่มี function ที่สืบทอดตาม interface ต้องการ
 	userController := controllers.NewUserController(userService) //// {} คือสร้าง instance go ไม่อนุญาติให้ใช้ตรงๆ
